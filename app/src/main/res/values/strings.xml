@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Voting</string>
+    <string name="ans_num">%d人回答</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Reset">リセット</string>
+    <string name="result_announce">結果発表</string>
+</resources>
