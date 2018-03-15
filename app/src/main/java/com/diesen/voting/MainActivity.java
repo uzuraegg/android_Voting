@@ -1,8 +1,10 @@
 package com.diesen.voting;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /** リセットボタン*/
     private Button reset_button;
@@ -41,6 +43,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ツールバーをアクションバーとしてセット
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
         answered_text = findViewById(R.id.ans_num);
         answered_text.setText(String.format(getString(R.string.ans_num), yes_count+no_count));
 
@@ -48,9 +54,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         reset_button = findViewById(R.id.resetButton);
         reset_button.setOnClickListener(this);
 
-        // 答えの決定ボタンに、押された際のイベントを設定
+        // 結果発表ボタンに、押された際のイベントを設定
         announce_button = findViewById(R.id.announceButton);
         announce_button.setOnClickListener(this);
+
+        // 質問入力欄
+        question_edit = findViewById(R.id.edit_question);
 
         // NOボタンに、押された際のイベントを設定
         no_button = findViewById(R.id.noButton);
@@ -78,7 +87,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // 結果発表ボタンならば
             case R.id.announceButton:
 
-                //announce();
+                Intent it_announce = new Intent(getApplicationContext(),ResultActivity.class);
+                it_announce.putExtra("yes_count",yes_count);
+                it_announce.putExtra("question", question_edit.getText().toString());
+                startActivity(it_announce);
                 break;
 
             // Noボタンならば

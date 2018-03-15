@@ -5,4 +5,5 @@
     <string name="No">No</string>
     <string name="Reset">リセット</string>
     <string name="result_announce">結果発表</string>
+    <string name="txt_result">%d人</string>
 </resources>
